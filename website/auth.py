@@ -3,8 +3,6 @@ from website import views
 
 from website.models import User, Result
 from website.publish import publish_result
-from website.consume import consume_que_msg
-from threading import Thread
 from . import db
 import pika
 
@@ -14,8 +12,6 @@ load_dotenv()
 
 
 auth = Blueprint('auth', __name__)
-consume_thread = Thread(target=consume_que_msg,daemon=True)
-consume_thread.start()
 @auth.route('/signin/', methods=['GET','POST'])
 def signin():
     if request.method == 'POST':
